@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://c3xnk02dc4pe7"]
+[gd_scene load_steps=13 format=4 uid="uid://c3xnk02dc4pe7"]
 
 [ext_resource type="Script" uid="uid://dd7icwo6qcqaw" path="res://Map/map.gd" id="1_5ej7w"]
 [ext_resource type="Texture2D" uid="uid://vv8kys5gx612" path="res://Map/Tiles/blocks_89.png" id="1_86j4t"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://hrvt5cth3xnw" path="res://Map/Tiles/blocks_1.png" id="4_d1580"]
 [ext_resource type="Script" uid="uid://uj4ho72lkapy" path="res://Map/colisionLayer.gd" id="5_8svjd"]
 [ext_resource type="PackedScene" uid="uid://bfg0j2kk07tdn" path="res://Player/player.tscn" id="6_d1580"]
-[ext_resource type="Script" uid="uid://1ma02u844udl" path="res://Player/player.gd" id="7_5ej7w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ej7w"]
 texture = ExtResource("1_86j4t")
@@ -80,7 +79,6 @@ script = ExtResource("5_8svjd")
 [node name="Player" parent="." instance=ExtResource("6_d1580")]
 z_index = 2
 position = Vector2(-63, 46)
-script = ExtResource("7_5ej7w")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
