@@ -16,3 +16,10 @@ func placeBoundary(tiles: Array) -> void:
 			if tiles.find(sourondingTile) == -1:
 				if get_cell_source_id(sourondingTile) == -1:
 					set_cell(sourondingTile,0,Vector2i.ZERO)
+					
+func isInLayer(tile:Vector2i) -> bool:
+	var ourTiles = get_used_cells()
+	return ourTiles.find(tile);
+	
+func getTileId(tile:Vector2i) -> int:
+	return get_cell_source_id(tile)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://c3xnk02dc4pe7"]
+[gd_scene load_steps=15 format=4 uid="uid://c3xnk02dc4pe7"]
 
 [ext_resource type="Script" uid="uid://dd7icwo6qcqaw" path="res://Map/map.gd" id="1_5ej7w"]
 [ext_resource type="Texture2D" uid="uid://vv8kys5gx612" path="res://Map/Tiles/blocks_89.png" id="1_86j4t"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://mn3y77ih4tuo" path="res://Map/Tiles/blocks_3.png" id="3_3g1qk"]
 [ext_resource type="Texture2D" uid="uid://hrvt5cth3xnw" path="res://Map/Tiles/blocks_1.png" id="4_d1580"]
 [ext_resource type="Script" uid="uid://uj4ho72lkapy" path="res://Map/colisionLayer.gd" id="5_8svjd"]
+[ext_resource type="Texture2D" uid="uid://dy474rgugn3om" path="res://Map/Tiles/blocks_30.png" id="6_5ej7w"]
 [ext_resource type="PackedScene" uid="uid://bfg0j2kk07tdn" path="res://Player/player.tscn" id="6_d1580"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ej7w"]
@@ -38,6 +39,13 @@ texture_region_size = Vector2i(64, 64)
 0:0/0/texture_origin = Vector2i(0, -16)
 0:1/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rr5ff"]
+texture = ExtResource("6_5ej7w")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -16)
+0:1/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_rr5ff"]
 tile_shape = 1
 tile_layout = 5
@@ -48,6 +56,7 @@ sources/1 = SubResource("TileSetAtlasSource_lymsy")
 sources/2 = SubResource("TileSetAtlasSource_5cbny")
 sources/0 = SubResource("TileSetAtlasSource_5ej7w")
 sources/3 = SubResource("TileSetAtlasSource_ptuj4")
+sources/4 = SubResource("TileSetAtlasSource_rr5ff")
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_5ej7w")
