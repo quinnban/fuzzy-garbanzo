@@ -287,6 +287,7 @@ z_index = 2
 shape = SubResource("CircleShape2D_4ntmi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_f4lon")
 animation = &"down"
 frame = 6

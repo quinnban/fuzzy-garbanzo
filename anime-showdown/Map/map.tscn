@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://c3xnk02dc4pe7"]
+[gd_scene load_steps=18 format=4 uid="uid://c3xnk02dc4pe7"]
 
 [ext_resource type="Script" uid="uid://dd7icwo6qcqaw" path="res://Map/map.gd" id="1_5ej7w"]
 [ext_resource type="Texture2D" uid="uid://vv8kys5gx612" path="res://Map/Tiles/blocks_89.png" id="1_86j4t"]
@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://mn3y77ih4tuo" path="res://Map/Tiles/blocks_3.png" id="3_3g1qk"]
 [ext_resource type="Texture2D" uid="uid://hrvt5cth3xnw" path="res://Map/Tiles/blocks_1.png" id="4_d1580"]
 [ext_resource type="Script" uid="uid://uj4ho72lkapy" path="res://Map/colisionLayer.gd" id="5_8svjd"]
-[ext_resource type="Texture2D" uid="uid://dy474rgugn3om" path="res://Map/Tiles/blocks_30.png" id="6_5ej7w"]
 [ext_resource type="PackedScene" uid="uid://bfg0j2kk07tdn" path="res://Player/player.tscn" id="6_d1580"]
+[ext_resource type="Texture2D" uid="uid://btngia5hggfbt" path="res://Map/Tiles/blocks_70.png" id="6_lymsy"]
+[ext_resource type="Texture2D" uid="uid://d03i60bit1sln" path="res://Map/Tiles/blocks_69.png" id="7_5cbny"]
+[ext_resource type="PackedScene" uid="uid://bneoifk2k03q2" path="res://Debug menu.tscn" id="9_lymsy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ej7w"]
 texture = ExtResource("1_86j4t")
@@ -40,11 +42,16 @@ texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rr5ff"]
-texture = ExtResource("6_5ej7w")
+texture = ExtResource("6_lymsy")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, -16)
-0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a0x20"]
+texture = ExtResource("7_5cbny")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -16)
 
 [sub_resource type="TileSet" id="TileSet_rr5ff"]
 tile_shape = 1
@@ -57,6 +64,7 @@ sources/2 = SubResource("TileSetAtlasSource_5cbny")
 sources/0 = SubResource("TileSetAtlasSource_5ej7w")
 sources/3 = SubResource("TileSetAtlasSource_ptuj4")
 sources/4 = SubResource("TileSetAtlasSource_rr5ff")
+sources/5 = SubResource("TileSetAtlasSource_a0x20")
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_5ej7w")
@@ -65,11 +73,12 @@ script = ExtResource("1_5ej7w")
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(1, 0)
-tile_map_data = PackedByteArray("AAD/////AwAAAAAAAAD//wAAAwAAAAAAAAAAAAAAAwAAAAAAAAAAAP//AwAAAAAAAAD+/wAAAwAAAAAAAAD+////AwAAAAAAAAD+/wEAAwAAAAAAAAD//wEAAwAAAAAAAAAAAAEAAwAAAAAAAAABAP//AwAAAAAAAAABAAAAAwAAAAAAAAABAAEAAwAAAAAAAAABAAIAAwAAAAAAAAAAAAIAAwAAAAAAAAD//wIAAwAAAAAAAAD+/wIAAwAAAAAAAAD+/wMAAwAAAAAAAAD//wMAAwAAAAAAAAAAAAMAAwAAAAAAAAABAAMAAwAAAAAAAAACAP//AwAAAAAAAAACAAAAAwAAAAAAAAACAAEAAwAAAAAAAAACAAIAAwAAAAAAAAACAAMAAwAAAAAAAAD9////AwAAAAAAAAD9/wAAAwAAAAAAAAD9/wEAAwAAAAAAAAD9/wIAAwAAAAAAAAD9/wMAAwAAAAAAAAD9/wQAAwAAAAAAAAD+/wQAAwAAAAAAAAD//wQAAwAAAAAAAAAAAAQAAwAAAAAAAAABAAQAAwAAAAAAAAACAAQAAwAAAAAAAAADAAQAAwAAAAAAAAAEAAQAAwAAAAAAAAAEAAMAAwAAAAAAAAAEAAIAAwAAAAAAAAAEAAEAAwAAAAAAAAAEAAAAAwAAAAAAAAADAAAAAwAAAAAAAAADAP//AwAAAAAAAAAEAP//AwAAAAAAAAADAAEAAwAAAAAAAAADAAIAAwAAAAAAAAADAAMAAwAAAAAAAAD///7/AQAAAAAAAAAAAP7/AQAAAAAAAAABAP7/AQAAAAAAAAD8/wAAAgAAAAAAAAD8/wEAAgAAAAAAAAD8/wIAAgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAwAAAAAAAAAAAAEABAAAAAAAAAABAAAABAAAAAAAAAABAAEAAwAAAAAAAAAAAAIAAwAAAAAAAAAAAAMABAAAAAAAAAABAAMAAwAAAAAAAAACAAAAAwAAAAAAAAACAAEABAAAAAAAAAACAAIAAwAAAAAAAAACAAMABAAAAAAAAAADAAAABAAAAAAAAAADAAEAAwAAAAAAAAADAAIABAAAAAAAAAADAAMAAwAAAAAAAAABAAIABAAAAAAAAAA=")
 tile_set = SubResource("TileSet_rr5ff")
 script = ExtResource("5_8svjd")
 
 [node name="Layer 2" type="TileMapLayer" parent="."]
+visible = false
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(2, -1)
@@ -78,6 +87,7 @@ tile_set = SubResource("TileSet_rr5ff")
 script = ExtResource("5_8svjd")
 
 [node name="Layer 3" type="TileMapLayer" parent="."]
+visible = false
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(1, 0)
@@ -87,7 +97,9 @@ script = ExtResource("5_8svjd")
 
 [node name="Player" parent="." instance=ExtResource("6_d1580")]
 z_index = 2
-position = Vector2(-63, 46)
+position = Vector2(33, 19)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
+
+[node name="DebugMenu" parent="." instance=ExtResource("9_lymsy")]
