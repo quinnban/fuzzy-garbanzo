@@ -12,6 +12,7 @@ extends CharacterBody2D
 
 var last_cell: Vector2i = Vector2i(-1, -1)
 var last_tile_id: int = 3;
+var movementRange: int = 2;
 
 func _process(delta: float) -> void:
 	update_mouse_debug()
@@ -21,7 +22,6 @@ func _process(delta: float) -> void:
 	current_local_pos.y = floor(current_local_pos.y);
 	var current_cell = layer1.local_to_map(current_local_pos)
 	ui.update_player_postion(current_cell)
-	ui.update_player_direction(last_cell)
 	if current_cell != last_cell:
 		if last_cell != Vector2i(-1, -1):
 			set_tile_at_position(last_cell,last_tile_id)
@@ -54,6 +54,13 @@ func update_mouse_debug() -> void:
 	ui.update_test_postion(mouse_local_pos)
 	ui.update_mouse_postion(mouse_cell)
 	
+func get_player_tile() -> Vector2i:
+	var current_local_pos = layer1.to_local(global_position)
+	current_local_pos.x = floor(current_local_pos.x);
+	current_local_pos.y = floor(current_local_pos.y);
+	var current_cell = layer1.local_to_map(current_local_pos)
+	return current_cell
+
 func _ready() -> void:
 	animated_sprite.stop();
 	animated_sprite.play("default");

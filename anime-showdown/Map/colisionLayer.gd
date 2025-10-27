@@ -19,7 +19,11 @@ func placeBoundary(tiles: Array) -> void:
 					
 func isInLayer(tile:Vector2i) -> bool:
 	var ourTiles = get_used_cells()
-	return ourTiles.find(tile);
+	if ourTiles.find(tile) != -1:
+		var boundary = get_cell_tile_data(tile)
+		return !boundary.get_custom_data('is_boundary')
+	return false
+	
 	
 func getTileId(tile:Vector2i) -> int:
 	return get_cell_source_id(tile)

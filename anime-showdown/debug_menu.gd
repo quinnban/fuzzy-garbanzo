@@ -7,7 +7,7 @@ class_name UI
 @onready var t = $%T;
 
 var player_postion = Vector2i.ZERO;
-var player_direction = Vector2i.ZERO;
+var mouse_over_char = false;
 var mouse_postion = Vector2i.ZERO;
 var test = Vector2i.ZERO;
 
@@ -15,8 +15,8 @@ func update_player_postion(value: Vector2i) -> void:
 	player_postion = value
 	update_player_postion_text()
 
-func update_player_direction(value: Vector2i) -> void:	
-	player_direction = value;
+func mouse_over_char_value(value: bool) -> void:	
+	mouse_over_char = value;
 	update_player_direction_text()
 
 func update_mouse_postion(value: Vector2i) -> void:	
@@ -33,7 +33,7 @@ func update_player_postion_text() -> void:
 	pp.text = "Player position: " + str(player_postion.x) + "," + str(player_postion.y);
 	
 func update_player_direction_text() -> void: 
-	pd.text = "Player Last position: " + str(player_direction.x) + "," + str(player_direction.y);
+	pd.text = "Mouse over char: " + str(mouse_over_char);
 	
 func update_mouse_postion_text() -> void: 
 	mp.text = "Mouse position: " + str(mouse_postion.x) + "," + str(mouse_postion.y);
