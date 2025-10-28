@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var layer3 = map.get_node("Layer 3")
 @onready var ui = map.get_node("DebugMenu")
 
-var movementRange: int = 2;
+var movementRange: int = 3;
 var state = Enums.PLAYER_STATE.IDLE;
 
 func _process(delta: float) -> void:

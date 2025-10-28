@@ -16,7 +16,6 @@ func _process(_delta: float) -> void:
 	if player.state == Enums.PLAYER_STATE.READY_TO_MOVE && is_point_in_range(get_mouse_cell()):
 		highlight_mouse_path()
 	
-
 func _input(event) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MouseButton.MOUSE_BUTTON_LEFT and event.pressed:
@@ -87,7 +86,7 @@ func is_point_in_range(cell_pos: Vector2i) -> bool:
 	var delta_x = cell_pos.x - player_cell.x
 	var delta_y = cell_pos.y - player_cell.y
 	return abs(delta_x) + abs(delta_y) <= player.movementRange
-	
+
 func astar_get_path(from:Vector2i,to:Vector2i) -> Array[Vector2i]:
 	var astar_grid = AStarGrid2D.new();
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER;
@@ -100,6 +99,7 @@ func move_player() -> void:
 	pass
 	
 func highlight_mouse_path() -> void:
+	highlight_player_movement()
 	var path = astar_get_path(player.get_player_tile(),get_mouse_cell())
 	for i in path:
 		set_tile_at_position(i,6)
