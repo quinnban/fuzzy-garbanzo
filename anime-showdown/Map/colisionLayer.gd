@@ -24,6 +24,11 @@ func isInLayer(tile:Vector2i) -> bool:
 		return !boundary.get_custom_data('is_boundary')
 	return false
 	
-	
 func getTileId(tile:Vector2i) -> int:
 	return get_cell_source_id(tile)
+
+func clearLayer() -> void:
+	var tiles = get_used_cells()
+	for tile: Vector2i in tiles:
+		set_cell(tile,-1,Vector2i.ZERO)
+		

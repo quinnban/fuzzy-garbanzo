@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://c3xnk02dc4pe7"]
+[gd_scene load_steps=24 format=4 uid="uid://c3xnk02dc4pe7"]
 
 [ext_resource type="Script" uid="uid://dd7icwo6qcqaw" path="res://Map/map.gd" id="1_5ej7w"]
 [ext_resource type="Texture2D" uid="uid://vv8kys5gx612" path="res://Map/Tiles/blocks_89.png" id="1_86j4t"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://btngia5hggfbt" path="res://Map/Tiles/blocks_70.png" id="6_lymsy"]
 [ext_resource type="Texture2D" uid="uid://d03i60bit1sln" path="res://Map/Tiles/blocks_69.png" id="7_5cbny"]
 [ext_resource type="Texture2D" uid="uid://lf1bjn3i1ee3" path="res://Map/Tiles/blocks_4.png" id="8_ptuj4"]
+[ext_resource type="Texture2D" uid="uid://dfqoe4cotb1x4" path="res://Map/mouse_highlight.png" id="9_a0x20"]
 [ext_resource type="PackedScene" uid="uid://bneoifk2k03q2" path="res://Debug/Debug menu.tscn" id="9_lymsy"]
+[ext_resource type="Texture2D" uid="uid://ciichhkw2xdpe" path="res://Map/movement_highlight.png" id="10_vhrv6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ej7w"]
 texture = ExtResource("1_86j4t")
@@ -57,6 +59,18 @@ texture_region_size = Vector2i(64, 64)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vhrv6"]
 texture = ExtResource("8_ptuj4")
+texture_region_size = Vector2i(64, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ry46t"]
+texture = ExtResource("9_a0x20")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xoeuw"]
+texture = ExtResource("10_vhrv6")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, -16)
@@ -76,34 +90,37 @@ sources/3 = SubResource("TileSetAtlasSource_ptuj4")
 sources/4 = SubResource("TileSetAtlasSource_rr5ff")
 sources/5 = SubResource("TileSetAtlasSource_a0x20")
 sources/6 = SubResource("TileSetAtlasSource_vhrv6")
+sources/7 = SubResource("TileSetAtlasSource_ry46t")
+sources/8 = SubResource("TileSetAtlasSource_xoeuw")
 
 [node name="Map" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_5ej7w")
 
-[node name="Layer 1" type="TileMapLayer" parent="."]
+[node name="Layer 3" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
+z_index = 2
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(1, 0)
-tile_map_data = PackedByteArray("AAAAAAAAAwAAAAAAAAAAAAEABAAAAAAAAAABAAAABAAAAAAAAAABAAEAAwAAAAAAAAAAAAIAAwAAAAAAAAAAAAMABAAAAAAAAAABAAMAAwAAAAAAAAACAAAAAwAAAAAAAAACAAEABAAAAAAAAAACAAIAAwAAAAAAAAACAAMABAAAAAAAAAADAAAABAAAAAAAAAADAAEAAwAAAAAAAAADAAIABAAAAAAAAAADAAMAAwAAAAAAAAABAAIABAAAAAAAAAD//wMAAwAAAAAAAAD//wIAAwAAAAAAAAD//wEAAwAAAAAAAAD//wAAAwAAAAAAAAD/////AwAAAAAAAAAAAP//AwAAAAAAAAABAP//AwAAAAAAAAACAP//AwAAAAAAAAADAP//AwAAAAAAAAADAP7/AwAAAAAAAAACAP7/AwAAAAAAAAABAP7/AwAAAAAAAAAAAP3/AwAAAAAAAAD///3/AwAAAAAAAAD+//3/AwAAAAAAAAD+//7/AwAAAAAAAAD9//7/AwAAAAAAAAD8//7/AwAAAAAAAAD8////AwAAAAAAAAD9////AwAAAAAAAAD9/wAAAwAAAAAAAAD9/wEAAwAAAAAAAAD9/wIAAwAAAAAAAAD+/wIAAwAAAAAAAAD+/wMAAwAAAAAAAAD+/wEAAwAAAAAAAAD+/wAAAwAAAAAAAAD+////AwAAAAAAAAD8/wAAAwAAAAAAAAD8/wEAAwAAAAAAAAD8/wIAAwAAAAAAAAD8/wMAAwAAAAAAAAD9/wMAAwAAAAAAAAD8//3/AwAAAAAAAAD8//z/AwAAAAAAAAD9//z/AwAAAAAAAAD+//z/AwAAAAAAAAD///z/AwAAAAAAAAAAAPz/AwAAAAAAAAABAP3/AwAAAAAAAAACAP3/AwAAAAAAAAADAP3/AwAAAAAAAAADAPz/AwAAAAAAAAACAPz/AwAAAAAAAAABAPz/AwAAAAAAAAD///7/AwAAAAAAAAAAAP7/AwAAAAAAAAD9//3/AwAAAAAAAAA=")
 tile_set = SubResource("TileSet_rr5ff")
 script = ExtResource("5_8svjd")
 
 [node name="Layer 2" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
-visible = false
+z_index = 1
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(2, -1)
 tile_set = SubResource("TileSet_rr5ff")
 script = ExtResource("5_8svjd")
 
-[node name="Layer 3" type="TileMapLayer" parent="."]
+[node name="Layer 1" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(1, 0)
+tile_map_data = PackedByteArray("AAAAAAAAAwAAAAAAAAAAAAEABAAAAAAAAAABAAAABAAAAAAAAAABAAEAAwAAAAAAAAAAAAIAAwAAAAAAAAAAAAMABAAAAAAAAAABAAMAAwAAAAAAAAACAAAAAwAAAAAAAAACAAEABAAAAAAAAAACAAIAAwAAAAAAAAACAAMABAAAAAAAAAADAAAABAAAAAAAAAADAAEAAwAAAAAAAAADAAIABAAAAAAAAAADAAMAAwAAAAAAAAABAAIABAAAAAAAAAD//wMAAwAAAAAAAAD//wIABAAAAAAAAAD//wEAAwAAAAAAAAD//wAABAAAAAAAAAD/////AwAAAAAAAAAAAP//BAAAAAAAAAABAP//AwAAAAAAAAACAP//BAAAAAAAAAADAP//AwAAAAAAAAADAP7/BAAAAAAAAAACAP7/AwAAAAAAAAABAP7/BAAAAAAAAAAAAP3/BQAAAAAAAAD///3/BQAAAAAAAAD+//3/BAAAAAAAAAD+//7/AwAAAAAAAAD9//7/BAAAAAAAAAD8//7/AwAAAAAAAAD8////BAAAAAAAAAD9////AwAAAAAAAAD9/wAABAAAAAAAAAD9/wEABQAAAAAAAAD9/wIABQAAAAAAAAD+/wIABQAAAAAAAAD+/wMABAAAAAAAAAD+/wEABQAAAAAAAAD+/wAAAwAAAAAAAAD+////BAAAAAAAAAD8/wAAAwAAAAAAAAD8/wEABAAAAAAAAAD8/wIAAwAAAAAAAAD8/wMABAAAAAAAAAD9/wMAAwAAAAAAAAD8//3/BAAAAAAAAAD8//z/AwAAAAAAAAD9//z/BAAAAAAAAAD+//z/AwAAAAAAAAD///z/BAAAAAAAAAAAAPz/AwAAAAAAAAABAP3/AwAAAAAAAAACAP3/BAAAAAAAAAADAP3/AwAAAAAAAAADAPz/BAAAAAAAAAACAPz/AwAAAAAAAAABAPz/BAAAAAAAAAD///7/BQAAAAAAAAAAAP7/BQAAAAAAAAD9//3/AwAAAAAAAAA=")
 tile_set = SubResource("TileSet_rr5ff")
 script = ExtResource("5_8svjd")
 
