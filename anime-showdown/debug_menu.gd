@@ -1,42 +1,40 @@
 extends CanvasLayer
 class_name UI
 
-@onready var pp = $%Pp;
-@onready var mp = $%Mp;
-@onready var pd = $%Pd;
-@onready var t = $%T;
+@onready var l1 = $%L1;
+@onready var l2 = $%L2;
+@onready var l3 = $%L3;
+@onready var l4 = $%L4;
 
-var player_postion = Vector2i.ZERO;
-var mouse_over_char = false;
-var mouse_postion = Vector2i.ZERO;
-var test = Vector2i.ZERO;
+var l1_t : String = "";
+var l2_t : String = "";
+var l3_t : String = "";
+var l4_t : String = "";
 
-func update_player_postion(value: Vector2i) -> void:	
-	player_postion = value
-	update_player_postion_text()
+func update_line_1(value: String) -> void:	
+	l1_t = value
+	update_line_1_text()
 
-func mouse_over_char_value(value: bool) -> void:	
-	mouse_over_char = value;
-	update_player_direction_text()
+func update_line_2(value: String) -> void:	
+	l2_t = value;
+	update_line_2_text()
 
-func update_mouse_postion(value: Vector2i) -> void:	
-	mouse_postion = value;
-	update_mouse_postion_text()
+func update_line_3(value: String) -> void:	
+	l3_t = value;
+	update_line_3_text()
 	
-func update_test_postion(value: Vector2i) -> void:	
-	test = value;
-	update_test_postion_text()
+func update_line_4(value: String) -> void:	
+	l4_t = value;
+	update_line_4_text()
 
+func update_line_1_text() -> void: 
+	l1.text = l1_t
 	
+func update_line_2_text() -> void: 
+	l2.text = l2_t
+	
+func update_line_3_text() -> void: 
+	l3.text = l3_t
 
-func update_player_postion_text() -> void: 
-	pp.text = "Player position: " + str(player_postion.x) + "," + str(player_postion.y);
-	
-func update_player_direction_text() -> void: 
-	pd.text = "Mouse over char: " + str(mouse_over_char);
-	
-func update_mouse_postion_text() -> void: 
-	mp.text = "Mouse position: " + str(mouse_postion.x) + "," + str(mouse_postion.y);
-
-func update_test_postion_text() -> void: 
-	t.text = "Mouse test position: " + str(test.x) + "," + str(test.y);
+func update_line_4_text() -> void: 
+	l4.text = l4_t

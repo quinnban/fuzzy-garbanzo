@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 	current_local_pos.x = floor(current_local_pos.x);
 	current_local_pos.y = floor(current_local_pos.y);
 	var current_cell = layer1.local_to_map(current_local_pos)
-	ui.update_player_postion(current_cell)
+	ui.update_line_1("Player cell: " + str(current_cell))
 	if current_cell != last_cell:
 		if last_cell != Vector2i(-1, -1):
 			set_tile_at_position(last_cell,last_tile_id)
@@ -51,8 +51,7 @@ func update_mouse_debug() -> void:
 	mouse_local_pos.x = floor(mouse_local_pos.x);
 	mouse_local_pos.y = floor(mouse_local_pos.y);
 	var mouse_cell = layer1.local_to_map(mouse_local_pos);
-	ui.update_test_postion(mouse_local_pos)
-	ui.update_mouse_postion(mouse_cell)
+	ui.update_line_2("Mouse cell: " + str(mouse_cell))
 	
 func get_player_tile() -> Vector2i:
 	var current_local_pos = layer1.to_local(global_position)

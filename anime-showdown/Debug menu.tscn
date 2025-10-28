@@ -14,14 +14,14 @@ offset_bottom = 74.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="Pp" type="Label" parent="Control"]
+[node name="L1" type="Label" parent="Control"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Player Position: 0,0"
 
-[node name="Mp" type="Label" parent="Control"]
+[node name="L2" type="Label" parent="Control"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = 21.0
@@ -29,7 +29,7 @@ offset_right = 150.0
 offset_bottom = 44.0
 text = "Mouse Position: 0,0"
 
-[node name="Pd" type="Label" parent="Control"]
+[node name="L3" type="Label" parent="Control"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = 43.0
@@ -37,7 +37,7 @@ offset_right = 142.0
 offset_bottom = 66.0
 text = "Player Direction: 0"
 
-[node name="T" type="Label" parent="Control"]
+[node name="L4" type="Label" parent="Control"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = 64.0

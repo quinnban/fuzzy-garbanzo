@@ -14,7 +14,6 @@ func _ready() -> void:
 	
 func _input(event) -> void:
 	if event is InputEventMouseButton:
-		menu.mouse_over_char_value(get_mouse_cell() == player.get_player_tile())
 		if event.button_index == MouseButton.MOUSE_BUTTON_LEFT and event.pressed:
 			if(get_mouse_cell() == player.get_player_tile()):
 				highlight_player_movement()
@@ -23,23 +22,39 @@ func _input(event) -> void:
 	
 func highlight_player_movement() -> void:
 	var player_cell = player.get_player_tile();
-	var range_x_neg = range(player_cell.x, (player_cell.x - player.movementRange-1),-1)
+	var range_x_neg = range(player_cell.x, (player_cell.x - player.movementRange-1),-1);
 	var range_y_neg = range(player_cell.y, (player_cell.y - player.movementRange-1),-1);
 	var range_x_pos = range(player_cell.x, player_cell.x + player.movementRange + 1, 1);
 	var range_y_pos = range(player_cell.y, (player_cell.y + player.movementRange + 1),1);
+	menu.update_line_3("Range x pos: " + str(range_x_pos))
+	menu.update_line_4("Range y pos: " + str(range_y_pos))
 	for i in range_x_neg:
 		for j in range_y_neg:
-			var delta_x = abs(i) - abs(player_cell.x);
-			var delta_y = abs(j) - abs(player_cell.y);
+			var delta_x = abs(i - player_cell.x);
+			var delta_y = abs(j - player_cell.y);
 			if abs(delta_x+delta_y) > player.movementRange:
-				break;
+				continue;
+			set_tile_at_position(Vector2i(i,j),5)
+	for i in range_x_neg:
+		for j in range_y_pos:
+			var delta_x = abs(i - player_cell.x);
+			var delta_y = abs(j - player_cell.y);
+			if abs(delta_x+delta_y) > player.movementRange:
+				continue;
 			set_tile_at_position(Vector2i(i,j),5)
 	for i in range_x_pos:
 		for j in range_y_pos:
-			var delta_x = abs(i) - abs(player_cell.x);
-			var delta_y = abs(j) - abs(player_cell.y);
+			var delta_x = abs(i - player_cell.x);
+			var delta_y = abs(j - player_cell.y);
 			if abs(delta_x+delta_y) > player.movementRange:
-				break;
+				continue;
+			set_tile_at_position(Vector2i(i,j),5)
+	for i in range_x_pos:
+		for j in range_y_neg:
+			var delta_x = abs(i - player_cell.x);
+			var delta_y = abs(j - player_cell.y);
+			if abs(delta_x+delta_y) > player.movementRange:
+				continue;
 			set_tile_at_position(Vector2i(i,j),5)
 
 func set_tile_at_position(cell_pos: Vector2i, tileId: int):
