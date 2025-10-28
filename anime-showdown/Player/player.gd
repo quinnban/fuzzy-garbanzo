@@ -73,22 +73,34 @@ func move_player_on_path(path: Array[Vector2i]) -> void:
 		var delta_x = get_player_tile().x  - node.x
 		var delta_y = get_player_tile().y - node.y
 		if delta_x > 0:
-			position.x -= 32
-			position.y -= 16
 			animated_sprite.play("left")
+			await move_postion(Enums.DIRECTION.LEFT)
 		elif delta_x < 0:
-			position.x += 32
-			position.y += 16
 			animated_sprite.play("right")
+			await move_postion(Enums.DIRECTION.RIGHT)
 		elif delta_y > 0:
-			position.x += 32
-			position.y -= 16
 			animated_sprite.play("up")
+			await move_postion(Enums.DIRECTION.UP)
 		elif delta_y < 0:
-			position.x -= 32
-			position.y +=16
 			animated_sprite.play("down")
-		await get_tree().create_timer(0.5).timeout
+			await move_postion(Enums.DIRECTION.DOWN)
+		##await get_tree().create_timer(0.5).timeout
 	state = Enums.PLAYER_STATE.IDLE
 	animated_sprite.play("default");
 		
+func move_postion(direction) -> void:
+	for i in range(16):
+		match direction:
+			Enums.DIRECTION.UP:
+				position.x += 2
+				position.y -= 1
+			Enums.DIRECTION.DOWN:
+				position.x -= 2
+				position.y +=1
+			Enums.DIRECTION.LEFT:
+				position.x -= 2
+				position.y -= 1
+			Enums.DIRECTION.RIGHT:
+				position.x += 2
+				position.y += 1
+		await get_tree().create_timer(0.03).timeout
