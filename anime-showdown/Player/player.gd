@@ -11,8 +11,9 @@ extends CharacterBody2D
 
 var movementRange: int = 3;
 var state = Enums.PLAYER_STATE.IDLE;
+const speed = 64;
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_mouse_debug()
 	var current_global_pos = global_position
 	var current_local_pos = layer1.to_local(current_global_pos)
@@ -20,12 +21,10 @@ func _process(delta: float) -> void:
 	current_local_pos.y = floor(current_local_pos.y);
 	var current_cell = layer1.local_to_map(current_local_pos)
 	ui.update_line_1("Player cell: " + str(current_cell))
-	#if current_cell != last_cell:
-		#if last_cell != Vector2i(-1, -1):
-			#set_tile_at_position(last_cell,last_tile_id)
-			#set_last_tile_id(last_cell)
-		#set_tile_at_position(current_cell,5)
-		#last_cell = current_cell
+	
+func _ready() -> void:
+	animated_sprite.stop();
+	animated_sprite.play("default");
 
 func set_tile_at_position(cell_pos: Vector2i, tileId: int):
 	if layer1.isInLayer(cell_pos):
@@ -50,10 +49,6 @@ func get_player_tile() -> Vector2i:
 	var current_cell = layer1.local_to_map(current_local_pos)
 	return current_cell
 
-func _ready() -> void:
-	animated_sprite.stop();
-	animated_sprite.play("default");
-
 #func _physics_process(delta: float) -> void:
 	#var direction = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 	#if direction != Vector2.ZERO:
@@ -71,3 +66,29 @@ func _ready() -> void:
 		#velocity = Vector2.ZERO
 		#animated_sprite.play("default");
 	#move_and_slide()
+
+func move_player_on_path(path: Array[Vector2i]) -> void:
+	state= Enums.PLAYER_STATE.MOVING
+	for node in path:
+		var delta_x = get_player_tile().x  - node.x
+		var delta_y = get_player_tile().y - node.y
+		if delta_x > 0:
+			position.x -= 32
+			position.y -= 16
+			animated_sprite.play("left")
+		elif delta_x < 0:
+			position.x += 32
+			position.y += 16
+			animated_sprite.play("right")
+		elif delta_y > 0:
+			position.x += 32
+			position.y -= 16
+			animated_sprite.play("up")
+		elif delta_y < 0:
+			position.x -= 32
+			position.y +=16
+			animated_sprite.play("down")
+		await get_tree().create_timer(0.5).timeout
+	state = Enums.PLAYER_STATE.IDLE
+	animated_sprite.play("default");
+		

@@ -96,7 +96,7 @@ func astar_get_path(from:Vector2i,to:Vector2i) -> Array[Vector2i]:
 	return astar_grid.get_id_path(from,to);
 
 func move_player() -> void: 
-	pass
+	player.move_player_on_path(astar_get_path(player.get_player_tile(),get_mouse_cell()))
 	
 func highlight_mouse_path() -> void:
 	highlight_player_movement()
