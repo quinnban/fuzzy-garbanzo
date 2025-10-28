@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://c3xnk02dc4pe7"]
+[gd_scene load_steps=20 format=4 uid="uid://c3xnk02dc4pe7"]
 
 [ext_resource type="Script" uid="uid://dd7icwo6qcqaw" path="res://Map/map.gd" id="1_5ej7w"]
 [ext_resource type="Texture2D" uid="uid://vv8kys5gx612" path="res://Map/Tiles/blocks_89.png" id="1_86j4t"]
@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bfg0j2kk07tdn" path="res://Player/player.tscn" id="6_d1580"]
 [ext_resource type="Texture2D" uid="uid://btngia5hggfbt" path="res://Map/Tiles/blocks_70.png" id="6_lymsy"]
 [ext_resource type="Texture2D" uid="uid://d03i60bit1sln" path="res://Map/Tiles/blocks_69.png" id="7_5cbny"]
-[ext_resource type="PackedScene" uid="uid://bneoifk2k03q2" path="res://Debug menu.tscn" id="9_lymsy"]
+[ext_resource type="Texture2D" uid="uid://lf1bjn3i1ee3" path="res://Map/Tiles/blocks_4.png" id="8_ptuj4"]
+[ext_resource type="PackedScene" uid="uid://bneoifk2k03q2" path="res://Debug/Debug menu.tscn" id="9_lymsy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ej7w"]
 texture = ExtResource("1_86j4t")
@@ -54,6 +55,12 @@ texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, -16)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vhrv6"]
+texture = ExtResource("8_ptuj4")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -16)
+
 [sub_resource type="TileSet" id="TileSet_rr5ff"]
 tile_shape = 1
 tile_layout = 5
@@ -68,6 +75,7 @@ sources/0 = SubResource("TileSetAtlasSource_5ej7w")
 sources/3 = SubResource("TileSetAtlasSource_ptuj4")
 sources/4 = SubResource("TileSetAtlasSource_rr5ff")
 sources/5 = SubResource("TileSetAtlasSource_a0x20")
+sources/6 = SubResource("TileSetAtlasSource_vhrv6")
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_5ej7w")
@@ -87,7 +95,6 @@ visible = false
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(2, -1)
-tile_map_data = PackedByteArray("AAABAP3/AwAAAAAAAAAAAP3/AwAAAAAAAAD///3/AwAAAAAAAAABAPz/AwAAAAAAAAAAAPz/AwAAAAAAAAD///z/AwAAAAAAAAD+//3/AwAAAAAAAAD9//3/AwAAAAAAAAD8//3/AwAAAAAAAAD8//z/AwAAAAAAAAD9//z/AwAAAAAAAAD+//z/AwAAAAAAAAD+//v/AwAAAAAAAAD9//v/AwAAAAAAAAD8//v/AwAAAAAAAAD///v/AwAAAAAAAAAAAPv/AwAAAAAAAAABAPv/AwAAAAAAAAACAPv/AwAAAAAAAAABAPr/AwAAAAAAAAAAAPr/AwAAAAAAAAD///r/AwAAAAAAAAD+//r/AwAAAAAAAAD9//r/AwAAAAAAAAD8//r/AwAAAAAAAAD8//n/AwAAAAAAAAD9//n/AwAAAAAAAAD+//n/AwAAAAAAAAD///n/AwAAAAAAAAAAAPn/AwAAAAAAAAABAPn/AwAAAAAAAAACAPn/AwAAAAAAAAACAPr/AwAAAAAAAAACAPz/AwAAAAAAAAACAP3/AwAAAAAAAAD7/wMAAwAAAAAAAAD7/wIAAwAAAAAAAAD7/wEAAwAAAAAAAAD7/wAAAwAAAAAAAAD7////AwAAAAAAAAD6////AwAAAAAAAAD5////AwAAAAAAAAD4////AwAAAAAAAAD4/wAAAwAAAAAAAAD4/wEAAwAAAAAAAAD5/wEAAwAAAAAAAAD5/wIAAwAAAAAAAAD6/wIAAwAAAAAAAAD6/wEAAwAAAAAAAAD6/wAAAwAAAAAAAAD5/wAAAwAAAAAAAAD5/wMAAwAAAAAAAAD6/wMAAwAAAAAAAAD4/wMAAwAAAAAAAAD4/wIAAwAAAAAAAAD5//7/AwAAAAAAAAD5//3/AwAAAAAAAAD5//z/AwAAAAAAAAD6//z/AwAAAAAAAAD7//z/AwAAAAAAAAD4//7/AwAAAAAAAAD4//3/AwAAAAAAAAD4//z/AwAAAAAAAAD4//v/AwAAAAAAAAD5//v/AwAAAAAAAAD6//v/AwAAAAAAAAD7//v/AwAAAAAAAAA=")
 tile_set = SubResource("TileSet_rr5ff")
 script = ExtResource("5_8svjd")
 
@@ -97,7 +104,6 @@ visible = false
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(1, 0)
-tile_map_data = PackedByteArray("AAAAAAUAAQAAAAAAAAABAAUAAQAAAAAAAAABAAcAAwAAAAAAAAACAAcAAwAAAAAAAAADAAcAAwAAAAAAAAAEAAcAAwAAAAAAAAAFAAcAAwAAAAAAAAAFAAgAAwAAAAAAAAAEAAgAAwAAAAAAAAADAAgAAwAAAAAAAAACAAgAAwAAAAAAAAABAAgAAwAAAAAAAAABAAkAAwAAAAAAAAACAAkAAwAAAAAAAAADAAkAAwAAAAAAAAADAAoAAwAAAAAAAAAEAAkAAwAAAAAAAAAFAAkAAwAAAAAAAAAFAAoAAwAAAAAAAAAEAAoAAwAAAAAAAAACAAoAAwAAAAAAAAABAAoAAwAAAAAAAAAAAAcAAwAAAAAAAAD//wcAAwAAAAAAAAD+/wcAAwAAAAAAAAD9/wcAAwAAAAAAAAD9/wgAAwAAAAAAAAD+/wgAAwAAAAAAAAD+/wkAAwAAAAAAAAD//wkAAwAAAAAAAAD//woAAwAAAAAAAAAAAAoAAwAAAAAAAAAAAAkAAwAAAAAAAAAAAAgAAwAAAAAAAAD//wgAAwAAAAAAAAD+/woAAwAAAAAAAAD9/woAAwAAAAAAAAD9/wkAAwAAAAAAAAD//wUAAQAAAAAAAAD+/wUAAQAAAAAAAAACAAYAAwAAAAAAAAABAAYAAwAAAAAAAAAAAAYAAwAAAAAAAAD//wYAAwAAAAAAAAADAAYAAwAAAAAAAAAEAAYAAwAAAAAAAAAFAAYAAwAAAAAAAAD+/wYAAwAAAAAAAAD9/wYAAwAAAAAAAAA=")
 tile_set = SubResource("TileSet_rr5ff")
 script = ExtResource("5_8svjd")
 

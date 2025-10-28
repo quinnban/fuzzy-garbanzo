@@ -1,0 +1,3 @@
+extends Node
+
+enum PLAYER_STATE {IDLE, READY_TO_MOVE, MOVING}

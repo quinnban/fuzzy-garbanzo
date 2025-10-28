@@ -11,15 +11,24 @@ func _ready() -> void:
 	layer1.placeBoundary(tiles)
 	layer2.placeBoundary(tiles)
 	layer3.placeBoundary(tiles)
+
+func _process(_delta: float) -> void:
+	if player.state == Enums.PLAYER_STATE.READY_TO_MOVE && is_point_in_range(get_mouse_cell()):
+		highlight_mouse_path()
 	
+
 func _input(event) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MouseButton.MOUSE_BUTTON_LEFT and event.pressed:
-			if(get_mouse_cell() == player.get_player_tile()):
+			menu.update_line_4("is point is range: " + str(is_point_in_range(get_mouse_cell())))
+			if(get_mouse_cell() == player.get_player_tile() && player.state == Enums.PLAYER_STATE.IDLE):
+				player.state = Enums.PLAYER_STATE.READY_TO_MOVE
 				highlight_player_movement()
-			
-	
-	
+			elif is_point_in_range(get_mouse_cell()) && player.state == Enums.PLAYER_STATE.READY_TO_MOVE:
+				move_player()
+			elif player.state != Enums.PLAYER_STATE.MOVING:
+				player.state = Enums.PLAYER_STATE.IDLE
+
 func highlight_player_movement() -> void:
 	var player_cell = player.get_player_tile();
 	var range_x_neg = range(player_cell.x, (player_cell.x - player.movementRange-1),-1);
@@ -57,7 +66,7 @@ func highlight_player_movement() -> void:
 				continue;
 			set_tile_at_position(Vector2i(i,j),5)
 
-func set_tile_at_position(cell_pos: Vector2i, tileId: int):
+func set_tile_at_position(cell_pos: Vector2i, tileId: int) -> void:
 	if layer1.isInLayer(cell_pos):
 		layer1.set_cell( cell_pos, tileId, Vector2i.ZERO)
 	if layer2.isInLayer(cell_pos):
@@ -72,3 +81,25 @@ func get_mouse_cell() -> Vector2i:
 	mouse_local_pos.y = floor(mouse_local_pos.y);
 	var mouse_cell = layer1.local_to_map(mouse_local_pos);
 	return mouse_cell;
+
+func is_point_in_range(cell_pos: Vector2i) -> bool:
+	var player_cell = player.get_player_tile();
+	var delta_x = cell_pos.x - player_cell.x
+	var delta_y = cell_pos.y - player_cell.y
+	return abs(delta_x) + abs(delta_y) <= player.movementRange
+	
+func astar_get_path(from:Vector2i,to:Vector2i) -> Array[Vector2i]:
+	var astar_grid = AStarGrid2D.new();
+	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER;
+	astar_grid.region = layer1.get_used_rect();
+	astar_grid.cell_size = Vector2(64, 64);
+	astar_grid.update()
+	return astar_grid.get_id_path(from,to);
+
+func move_player() -> void: 
+	pass
+	
+func highlight_mouse_path() -> void:
+	var path = astar_get_path(player.get_player_tile(),get_mouse_cell())
+	for i in path:
+		set_tile_at_position(i,6)
