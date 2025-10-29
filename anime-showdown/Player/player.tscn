@@ -287,9 +287,8 @@ z_index = 2
 shape = SubResource("CircleShape2D_4ntmi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -20)
+position = Vector2(0, -11)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_f4lon")
-animation = &"down"
-frame = 6
-frame_progress = 0.11794638
+animation = &"up"
 script = ExtResource("3_gwnis")

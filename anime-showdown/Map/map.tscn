@@ -90,6 +90,7 @@ texture_region_size = Vector2i(32, 32)
 3:7/0 = 0
 3:7/0/texture_origin = Vector2i(0, -8)
 2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -8)
 2:0/0/custom_data_0 = true
 
 [sub_resource type="TileSet" id="TileSet_rr5ff"]
@@ -147,11 +148,10 @@ script = ExtResource("5_8svjd")
 
 [node name="Player" parent="." instance=ExtResource("6_d1580")]
 unique_name_in_owner = true
-visible = false
 z_index = 2
-position = Vector2(33, 19)
+position = Vector2(18, 23)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
 
 [node name="DebugMenu" parent="." instance=ExtResource("9_lymsy")]

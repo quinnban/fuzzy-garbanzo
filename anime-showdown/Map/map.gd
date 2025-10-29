@@ -106,7 +106,7 @@ func move_player() -> void:
 	player.move_player_on_path(astar_get_path(player.get_player_tile(),get_mouse_cell()))
 	
 func highlight_mouse_path() -> void:
-	wall_map.clear();
+	astar_map.clear();
 	var path = astar_get_path(player.get_player_tile(),get_mouse_cell())
 	for i in path:
 		if is_useable_tile(i):
