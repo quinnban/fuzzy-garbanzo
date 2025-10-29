@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2llygquwk1aj"
-path="res://.godot/imported/Isometric-SpriteSheet.png-4ea067403617b7d7ca5c1887b279ef92.ctex"
+uid="uid://bs2nccyewcmmv"
+path="res://.godot/imported/player_movement.png-dc3082709790d0f9538626229cd982ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/TileMap/Isometric-SpriteSheet.png"
-dest_files=["res://.godot/imported/Isometric-SpriteSheet.png-4ea067403617b7d7ca5c1887b279ef92.ctex"]
+source_file="res://Map/TileMap/player_movement.png"
+dest_files=["res://.godot/imported/player_movement.png-dc3082709790d0f9538626229cd982ff.ctex"]
 
 [params]
 

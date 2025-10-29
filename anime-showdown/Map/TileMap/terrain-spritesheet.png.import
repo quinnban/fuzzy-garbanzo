@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clsyg3lmndugq"
-path="res://.godot/imported/astar-highlight.png-a2f9ac77d6a5cc66ef3ae8cce3b6bfdf.ctex"
+uid="uid://2llygquwk1aj"
+path="res://.godot/imported/terrain-spritesheet.png-a6246d7341c03fa7957da1d657099aad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/TileMap/astar-highlight.png"
-dest_files=["res://.godot/imported/astar-highlight.png-a2f9ac77d6a5cc66ef3ae8cce3b6bfdf.ctex"]
+source_file="res://Map/TileMap/terrain-spritesheet.png"
+dest_files=["res://.godot/imported/terrain-spritesheet.png-a6246d7341c03fa7957da1d657099aad.ctex"]
 
 [params]
 
