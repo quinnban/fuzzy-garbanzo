@@ -1,17 +1,16 @@
 extends Node2D
 
-@onready var layer1 = $"%Layer 1"
-@onready var layer2 = $"%Layer 2"
-@onready var layer3 =$"%Layer 3"
+@onready var terrain_map = $%terrain
+@onready var movement_map = $%movement_highlight
+@onready var astar_map = $%astar_highlight
+@onready var wall_map = $%wall
 @onready var player = $Player;
 @onready var menu = $DebugMenu;
 var last_mouse_cell = Vector2i.ZERO;
 
 func _ready() -> void:
-	var tiles = layer1.get_used_cells() + layer2.get_used_cells() + layer3.get_used_cells();
-	layer1.placeBoundary(tiles)
-	layer2.placeBoundary(tiles)
-	layer3.placeBoundary(tiles)
+	var tiles = terrain_map.get_used_cells()
+	terrain_map.placeBoundary(tiles)
 
 func _process(_delta: float) -> void:
 	if player.state == Enums.PLAYER_STATE.READY_TO_MOVE && is_point_in_range(get_mouse_cell()) && get_mouse_cell() != last_mouse_cell:
@@ -26,12 +25,12 @@ func _input(event) -> void:
 				player.state = Enums.PLAYER_STATE.READY_TO_MOVE
 				highlight_player_movement()
 			elif is_point_in_range(get_mouse_cell()) && player.state == Enums.PLAYER_STATE.READY_TO_MOVE:
-				layer2.clear()
-				layer3.clear()
+				movement_map.clear()
+				astar_map.clear()
 				move_player()
 			elif player.state != Enums.PLAYER_STATE.MOVING:
-				layer2.clear()
-				layer3.clear()
+				movement_map.clear()
+				astar_map.clear()
 				player.state = Enums.PLAYER_STATE.IDLE
 
 func highlight_player_movement() -> void:
@@ -42,54 +41,49 @@ func highlight_player_movement() -> void:
 	var range_y_pos = range(player_cell.y, (player_cell.y + player.movementRange + 1),1);
 	menu.update_line_3("Range x pos: " + str(range_x_pos))
 	menu.update_line_4("Range y pos: " + str(range_y_pos))
-	layer2.clear();
+	movement_map.clear();
 	for i in range_x_neg:
 		for j in range_y_neg:
 			var delta_x = abs(i - player_cell.x);
 			var delta_y = abs(j - player_cell.y);
 			if abs(delta_x+delta_y) > player.movementRange:
 				continue;
-			if layer1.isInLayer(Vector2i(i,j)):
-				layer2.set_cell( Vector2i(i,j),8, Vector2i.ZERO)
+			if is_useable_tile(Vector2i(i,j)):
+				movement_map.set_cell( Vector2i(i,j),11, Vector2i.ZERO)
 	for i in range_x_neg:
 		for j in range_y_pos:
 			var delta_x = abs(i - player_cell.x);
 			var delta_y = abs(j - player_cell.y);
 			if abs(delta_x+delta_y) > player.movementRange:
 				continue;
-			if layer1.isInLayer(Vector2i(i,j)):
-				layer2.set_cell( Vector2i(i,j),8, Vector2i.ZERO)
+			if is_useable_tile(Vector2i(i,j)):
+				movement_map.set_cell( Vector2i(i,j),11, Vector2i.ZERO)
 	for i in range_x_pos:
 		for j in range_y_pos:
 			var delta_x = abs(i - player_cell.x);
 			var delta_y = abs(j - player_cell.y);
 			if abs(delta_x+delta_y) > player.movementRange:
 				continue;
-			if layer1.isInLayer(Vector2i(i,j)):
-				layer2.set_cell( Vector2i(i,j),8, Vector2i.ZERO)
+			if is_useable_tile(Vector2i(i,j)):
+				movement_map.set_cell( Vector2i(i,j),11, Vector2i.ZERO)
 	for i in range_x_pos:
 		for j in range_y_neg:
 			var delta_x = abs(i - player_cell.x);
 			var delta_y = abs(j - player_cell.y);
 			if abs(delta_x+delta_y) > player.movementRange:
 				continue;
-			if layer1.isInLayer(Vector2i(i,j)):
-				layer2.set_cell( Vector2i(i,j),8, Vector2i.ZERO)
+			if is_useable_tile(Vector2i(i,j)):
+				movement_map.set_cell( Vector2i(i,j),11, Vector2i.ZERO)
 
-func set_tile_at_position(cell_pos: Vector2i, tileId: int) -> void:
-	if layer1.isInLayer(cell_pos):
-		layer1.set_cell( cell_pos, tileId, Vector2i.ZERO)
-	if layer2.isInLayer(cell_pos):
-		layer2.set_cell( cell_pos, tileId, Vector2i.ZERO)
-	if layer3.isInLayer(cell_pos):
-		layer3.set_cell( cell_pos, tileId, Vector2i.ZERO)
+func is_useable_tile(tile : Vector2i) -> bool :
+	return terrain_map.isInLayer(tile) && !wall_map.isInLayer(tile)
 
 func get_mouse_cell() -> Vector2i:
 	var mouse_position_viewport = get_global_mouse_position()
-	var mouse_local_pos = layer1.to_local(mouse_position_viewport)
+	var mouse_local_pos = terrain_map.to_local(mouse_position_viewport)
 	mouse_local_pos.x = floor(mouse_local_pos.x);
 	mouse_local_pos.y = floor(mouse_local_pos.y);
-	var mouse_cell = layer1.local_to_map(mouse_local_pos);
+	var mouse_cell = terrain_map.local_to_map(mouse_local_pos);
 	return mouse_cell;
 
 func is_point_in_range(cell_pos: Vector2i) -> bool:
@@ -101,8 +95,10 @@ func is_point_in_range(cell_pos: Vector2i) -> bool:
 func astar_get_path(from:Vector2i,to:Vector2i) -> Array[Vector2i]:
 	var astar_grid = AStarGrid2D.new();
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER;
-	astar_grid.region = layer1.get_used_rect();
-	astar_grid.cell_size = Vector2(64, 64);
+	astar_grid.region = terrain_map.get_used_rect();
+	astar_grid.cell_size = Vector2(32, 32);
+	for i in wall_map.get_used_cells():
+		astar_grid.set_point_solid(i)
 	astar_grid.update()
 	return astar_grid.get_id_path(from,to);
 
@@ -110,8 +106,8 @@ func move_player() -> void:
 	player.move_player_on_path(astar_get_path(player.get_player_tile(),get_mouse_cell()))
 	
 func highlight_mouse_path() -> void:
-	layer3.clear();
+	wall_map.clear();
 	var path = astar_get_path(player.get_player_tile(),get_mouse_cell())
 	for i in path:
-		if layer1.isInLayer(i):
-			layer3.set_cell( i, 7, Vector2i.ZERO)
+		if is_useable_tile(i):
+			astar_map.set_cell( i, 10, Vector2i.ZERO)
