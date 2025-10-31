@@ -293,6 +293,8 @@ tile_size = Vector2i(32, 16)
 physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "is_boundary"
 custom_data_layer_0/type = 1
+custom_data_layer_1/name = "modulate"
+custom_data_layer_1/type = 20
 sources/0 = SubResource("TileSetAtlasSource_ptuj4")
 sources/1 = SubResource("TileSetAtlasSource_a0x20")
 sources/2 = SubResource("TileSetAtlasSource_vhrv6")
@@ -312,6 +314,7 @@ script = ExtResource("5_8svjd")
 
 [node name="movement_highlight" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(2, -1)
@@ -320,6 +323,7 @@ script = ExtResource("5_8svjd")
 
 [node name="wall" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
