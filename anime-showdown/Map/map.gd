@@ -18,9 +18,6 @@ func _ready() -> void:
 	astar_grid.update()
 	for i in wall_map.get_used_cells():
 		astar_grid.set_point_solid(i)
-		
-	terrain_map.set_cell_color(Vector2i(0, 0), Color(1, 1, 1, 0))
-	terrain_map.set_cell_color(Vector2i(-2, 3), Color(1, 1, 1, 0))
 
 func _process(_delta: float) -> void:
 	if player.state == Enums.PLAYER_STATE.READY_TO_MOVE && is_point_in_range(get_mouse_cell()) && get_mouse_cell() != last_mouse_cell:
@@ -30,18 +27,19 @@ func _process(_delta: float) -> void:
 func _input(event) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MouseButton.MOUSE_BUTTON_LEFT and event.pressed:
-			terrain_map.set_cell_color(get_mouse_cell(),Color(1, 1, 1, 0))
 			menu.update_line_4("is point is range: " + str(is_point_in_range(get_mouse_cell())))
 			if(get_mouse_cell() == player.get_player_tile() && player.state == Enums.PLAYER_STATE.IDLE):
 				player.state = Enums.PLAYER_STATE.READY_TO_MOVE
-				#highlight_player_movement()
+				highlight_player_movement()
 			elif is_point_in_range(get_mouse_cell()) && player.state == Enums.PLAYER_STATE.READY_TO_MOVE:
-				#movement_map.clear()
-				#astar_map.clear()
+				movement_map.clear()
+				astar_map.clear()
+				terrain_map.show_all_tiles()
 				move_player()
 			elif player.state != Enums.PLAYER_STATE.MOVING:
-				#movement_map.clear()
-				#astar_map.clear()
+				movement_map.clear()
+				astar_map.clear()
+				terrain_map.show_all_tiles()
 				player.state = Enums.PLAYER_STATE.IDLE
 
 func is_useable_tile(tile : Vector2i) -> bool :
@@ -76,6 +74,7 @@ func highlight_player_movement() -> void:
 	menu.update_line_3("Range x pos: " + str(range_x_pos))
 	menu.update_line_4("Range y pos: " + str(range_y_pos))
 	movement_map.clear();
+	terrain_map.show_all_tiles();
 	for i in range_x_neg:
 		for j in range_y_neg:
 			var delta_x = abs(i - player_cell.x);
@@ -84,38 +83,45 @@ func highlight_player_movement() -> void:
 				continue;
 			if is_useable_tile(Vector2i(i,j)):
 				terrain_map.set_cell_color(Vector2i(i,j),Color(1,1,1,0))
-				#movement_map.set_cell( Vector2i(i,j),11, Vector2i.ZERO)
+				var atlas = terrain_map.getTileAtlas(Vector2i(i,j));
+				movement_map.set_cell( Vector2i(i,j),1, atlas)
 	for i in range_x_neg:
 		for j in range_y_pos:
 			var delta_x = abs(i - player_cell.x);
 			var delta_y = abs(j - player_cell.y);
 			if abs(delta_x+delta_y) > player.movementRange:
 				continue;
-			#if is_useable_tile(Vector2i(i,j)):
-				#movement_map.set_cell( Vector2i(i,j),11, Vector2i.ZERO)
+			if is_useable_tile(Vector2i(i,j)):
+				terrain_map.set_cell_color(Vector2i(i,j),Color(1,1,1,0))
+				var atlas = terrain_map.getTileAtlas(Vector2i(i,j));
+				movement_map.set_cell( Vector2i(i,j),1, atlas)
 	for i in range_x_pos:
 		for j in range_y_pos:
 			var delta_x = abs(i - player_cell.x);
 			var delta_y = abs(j - player_cell.y);
 			if abs(delta_x+delta_y) > player.movementRange:
 				continue;
-			#if is_useable_tile(Vector2i(i,j)):
-				#movement_map.set_cell( Vector2i(i,j),11, Vector2i.ZERO)
+			if is_useable_tile(Vector2i(i,j)):
+				terrain_map.set_cell_color(Vector2i(i,j),Color(1,1,1,0))
+				var atlas = terrain_map.getTileAtlas(Vector2i(i,j));
+				movement_map.set_cell( Vector2i(i,j),1, atlas)
 	for i in range_x_pos:
 		for j in range_y_neg:
 			var delta_x = abs(i - player_cell.x);
 			var delta_y = abs(j - player_cell.y);
 			if abs(delta_x+delta_y) > player.movementRange:
 				continue;
-			#if is_useable_tile(Vector2i(i,j)):
-				#movement_map.set_cell( Vector2i(i,j),11, Vector2i.ZERO)
+			if is_useable_tile(Vector2i(i,j)):
+				terrain_map.set_cell_color(Vector2i(i,j),Color(1,1,1,0))
+				var atlas = terrain_map.getTileAtlas(Vector2i(i,j));
+				movement_map.set_cell( Vector2i(i,j),1, atlas)
 
 func highlight_mouse_path() -> void:
 	astar_map.clear();
-	#terrain_map.showAll();
+	movement_map.show_all_tiles();
 	var path = astar_get_path(player.get_player_tile(),get_mouse_cell())
 	for i in path:
 		if is_useable_tile(i):
 			var atlas = terrain_map.getTileAtlas(i);
+			movement_map.set_cell_color(Vector2i(i.x,i.y),Color(1, 1, 1, 0.0));
 			astar_map.set_cell(i, 2, atlas)
-			terrain_map.set_cell_color(Vector2i(i.x,i.y),Color(1, 1, 1, 0.0));
