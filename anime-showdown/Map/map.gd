@@ -34,12 +34,12 @@ func _input(event) -> void:
 			elif is_point_in_range(get_mouse_cell()) && player.state == Enums.PLAYER_STATE.READY_TO_MOVE:
 				movement_map.clear()
 				astar_map.clear()
-				terrain_map.show_all_tiles()
+				show_hidden_terrain_tiles()
 				move_player()
 			elif player.state != Enums.PLAYER_STATE.MOVING:
 				movement_map.clear()
 				astar_map.clear()
-				terrain_map.show_all_tiles()
+				show_hidden_terrain_tiles()
 				player.state = Enums.PLAYER_STATE.IDLE
 
 func is_useable_tile(tile : Vector2i) -> bool :
@@ -118,10 +118,15 @@ func highlight_player_movement() -> void:
 
 func highlight_mouse_path() -> void:
 	astar_map.clear();
-	movement_map.show_all_tiles();
+	movement_map.show_all_tiles()
+	
 	var path = astar_get_path(player.get_player_tile(),get_mouse_cell())
 	for i in path:
 		if is_useable_tile(i):
 			var atlas = terrain_map.getTileAtlas(i);
-			movement_map.set_cell_color(Vector2i(i.x,i.y),Color(1, 1, 1, 0.0));
+			terrain_map.set_cell_color(Vector2i(i.x,i.y),Color(1, 1, 1, 0.0));
 			astar_map.set_cell(i, 2, atlas)
+
+func show_hidden_terrain_tiles():
+	for coords in terrain_map.modulated_cells.keys():
+		terrain_map.set_cell_color(coords,Color.WHITE)

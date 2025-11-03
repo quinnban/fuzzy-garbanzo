@@ -12,13 +12,10 @@ func set_cell_color(coords: Vector2i, color: Color):
 func show_all_tiles():
 	if modulated_cells.is_empty():
 		return
-	modulated_cells.clear()
 	for coords in modulated_cells.keys():
-		var source_id = get_cell_source_id(coords)
-		var atlas_coords = get_cell_atlas_coords(coords) 
-		# Calling set_cell() forces the engine to use the default TileSet data
-		set_cell(coords, source_id, atlas_coords)
-	notify_runtime_tile_data_update()
+		set_cell_color(coords,Color.WHITE)
+		
+	modulated_cells.clear()
 
 # The virtual functions must still be defined correctly
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
