@@ -30,6 +30,7 @@ func _input(event) -> void:
 			menu.update_line_4("is point is range: " + str(is_point_in_range(get_mouse_cell())))
 			if(get_mouse_cell() == player.get_player_tile() && player.state == Enums.PLAYER_STATE.IDLE):
 				player.state = Enums.PLAYER_STATE.READY_TO_MOVE
+				player._toggle_character_stats()
 				highlight_player_movement()
 			elif is_point_in_range(get_mouse_cell()) && player.state == Enums.PLAYER_STATE.READY_TO_MOVE:
 				movement_map.clear()

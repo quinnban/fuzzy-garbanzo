@@ -299,32 +299,3 @@ offset_left = -11.0
 offset_top = -26.0
 offset_right = 10.0
 offset_bottom = -24.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("4_gwnis")]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -252.0
-offset_top = -78.0
-offset_right = -12.0
-offset_bottom = -74.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="NameLabel" type="Label" parent="CanvasLayer"]
-offset_left = 899.0
-offset_top = 536.0
-offset_right = 1005.0
-offset_bottom = 559.0
-text = "Skeleton Man"
-
-[node name="HealthLabel" type="Label" parent="CanvasLayer"]
-offset_left = 871.0
-offset_top = 559.0
-offset_right = 911.0
-offset_bottom = 582.0
-text = "HP"
